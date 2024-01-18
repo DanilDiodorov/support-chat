@@ -1,0 +1,16 @@
+{
+    "destinations": {
+        "oneclick_test": {
+            "name": "OneCLick Test",
+            "url": "https://botadmin.yakutia.click/chatadapter/chatapi/webhook/operatorapi/dc7ff802-fa35-45e8-806b-3f4f149f1400"
+        },
+        "oneclick": {
+            "name": "OneClick",
+            "url": ""
+        },
+        "e_yakutia": {
+            "name": "E-yakutia",
+            "url": ""
+        }
+    }
+}
