@@ -32,6 +32,10 @@ const Routing = () => {
                             <Route path="/profile" element={<ProfilePage />} />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
+                        <Route
+                            path="/chats/*"
+                            element={<Navigate to="/" replace />}
+                        />
                     </Routes>
                 ) : (
                     <Routes>

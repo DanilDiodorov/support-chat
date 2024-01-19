@@ -16,7 +16,7 @@ export const useSocket = () => {
 
     useEffect(() => {
         if (user && !flag) {
-            const Socket = io(process.env.REACT_SOCKET_API_URL, {
+            const Socket = io(process.env.REACT_APP_SOCKET_API_URL, {
                 withCredentials: true,
                 id: user.id,
                 query: {

@@ -1,36 +1,19 @@
 import styled from 'styled-components'
 import { MessageCard } from './message-card'
 import { AlertMessage } from './alert-message'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { animateScroll } from 'react-scroll'
 import { useDispatch } from 'react-redux'
 import { setIsRead } from '../model'
 
 export const MessagesList = ({ currentChat, currentMessages }) => {
     const dispatch = useDispatch()
-    const [active, setActive] = useState(true)
 
     useEffect(() => {
-        function handleFocus() {
-            setActive(true)
-        }
-        function handleBlur() {
-            setActive(false)
-        }
-        window.addEventListener('focus', handleFocus)
-        window.addEventListener('blur', handleBlur)
-
-        return () => {
-            window.removeEventListener('focus', handleFocus)
-            window.removeEventListener('blur', handleBlur)
-        }
-    }, [])
-
-    useEffect(() => {
-        if (currentChat && active) {
+        if (currentChat) {
             dispatch(setIsRead(currentChat.id))
         }
-    }, [currentChat, currentMessages, dispatch, active])
+    }, [currentChat, currentMessages, dispatch])
 
     useEffect(() => {
         animateScroll.scrollToBottom({
