@@ -1,2 +1,3 @@
 node_modules
-.envout 
+.envout
+assets/images/users/*
