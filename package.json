@@ -7,8 +7,8 @@
         "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
         "build": "cd client && npm run build",
         "start": "set node_env=production&& node server.js",
-        "windows-prod": "cd client && npm run build && cd .. && set node_env=production&& pm2 start server.js --name support-chat",
-        "linux-prod": "cd client && npm run build && cd .. && export node_env=production&& pm2 start server.js --name support-chat",
+        "windows-prod": "npm i package.json && cd client && npm i package.json && npm run build && cd .. && set NODE_ENV=production&& pm2 start server.js --name support-chat",
+        "linux-prod": "npm i package.json && cd client && npm i package.json && npm run build && cd .. && export NODE_ENV=production&& pm2 start server.js --name support-chat",
         "remove": "pm2 delete support-chat"
     },
     "keywords": [],
