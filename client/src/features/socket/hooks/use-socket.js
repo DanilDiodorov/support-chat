@@ -35,18 +35,18 @@ export const useSocket = () => {
     }, [user])
 
     useEffect(() => {
-        const handleVisibilityChange = () => {
-            console.log(!document.hidden)
-            setIsTabActive(!document.hidden)
+        const handleWindowFocus = () => {
+            setIsTabActive(true)
         }
-
-        document.addEventListener('visibilitychange', handleVisibilityChange)
+        const handleWindowBlur = () => {
+            setIsTabActive(false)
+        }
+        window.addEventListener('focus', handleWindowFocus)
+        window.addEventListener('blur', handleWindowBlur)
 
         return () => {
-            document.removeEventListener(
-                'visibilitychange',
-                handleVisibilityChange
-            )
+            window.removeEventListener('focus', handleWindowFocus)
+            window.removeEventListener('blur', handleWindowBlur)
         }
     }, [])
 
