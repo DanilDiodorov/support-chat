@@ -43,12 +43,11 @@ export const useSocket = () => {
         }
         window.addEventListener('focus', handleWindowFocus)
         window.addEventListener('blur', handleWindowBlur)
-
-        return () => {
-            window.removeEventListener('focus', handleWindowFocus)
-            window.removeEventListener('blur', handleWindowBlur)
-        }
     }, [])
+
+    useEffect(() => {
+        console.log(isTabActive)
+    }, [isTabActive])
 
     useEffect(() => {
         socket?.on('chat:add', (data) => {

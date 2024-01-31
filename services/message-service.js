@@ -41,7 +41,6 @@ class MessageService {
 
     async addTextMessageFromClient(clientId, text) {
         let chat = onlineService.getClientData(clientId)
-
         if (!chat) {
             const query = await db.query(
                 'SELECT id, operator_id FROM chats WHERE client_id=$1 AND is_closed=false',
