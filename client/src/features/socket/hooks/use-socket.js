@@ -14,7 +14,7 @@ export const useSocket = () => {
     const [socket, setSocket] = useState(null)
     const dispatch = useDispatch()
     const queryClient = useQueryClient()
-    const [isTabActive, setIsTabActive] = useState(true)
+    const [isTabActive, setIsTabActive] = useState(false)
 
     useEffect(() => {
         if (user && !flag) {
