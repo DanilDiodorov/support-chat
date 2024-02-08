@@ -10,6 +10,7 @@ import LoginPage from './login-page'
 import RegistrationPage from './registration-page'
 import ProfilePage from './profile-page'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import TemplatesPage from './templates-page'
 
 const Routing = () => {
     const isLoading = useRefresh()
@@ -30,6 +31,10 @@ const Routing = () => {
                                 />
                             </Route>
                             <Route path="/profile" element={<ProfilePage />} />
+                            <Route
+                                path="/templates"
+                                element={<TemplatesPage />}
+                            />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
                         <Route

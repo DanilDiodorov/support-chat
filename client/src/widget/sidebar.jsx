@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { SlSettings } from 'react-icons/sl'
 import { BsChatLeftText } from 'react-icons/bs'
 import { OperatorPhoto } from 'entities/user'
+import { LuSettings2 } from 'react-icons/lu'
 
 const Sidebar = () => {
     return (
@@ -17,6 +18,9 @@ const Sidebar = () => {
                 </Link>
                 <Link to="profile" style={{ color: 'white' }}>
                     <SlSettings />
+                </Link>
+                <Link to="templates" style={{ color: 'white' }}>
+                    <LuSettings2 />
                 </Link>
             </Middle>
             <Bottom>

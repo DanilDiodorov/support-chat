@@ -10,6 +10,7 @@ export const PopupLayout = ({
     setActive,
     disabled,
     isLoading,
+    buttons,
 }) => {
     return (
         <Main
@@ -27,27 +28,32 @@ export const PopupLayout = ({
                 </Content>
                 <Footer>
                     <Container>
-                        <Buttons>
-                            <Button
-                                varient="text"
-                                buttonProps={{
-                                    onClick: () => setActive(false),
-                                }}
-                                isLoading={isLoading}
-                            >
-                                Отмена
-                            </Button>
-                            <Button
-                                buttonProps={{
-                                    style: { padding: '0 40px' },
-                                    onClick: onConfirm,
-                                }}
-                                disabled={disabled}
-                                isLoading={isLoading}
-                            >
-                                Ок
-                            </Button>
-                        </Buttons>
+                        <FooterContent>
+                            <Left>{buttons}</Left>
+                            <Right>
+                                <Buttons>
+                                    <Button
+                                        varient="text"
+                                        buttonProps={{
+                                            onClick: () => setActive(false),
+                                        }}
+                                        isLoading={isLoading}
+                                    >
+                                        Отмена
+                                    </Button>
+                                    <Button
+                                        buttonProps={{
+                                            style: { padding: '0 40px' },
+                                            onClick: onConfirm,
+                                        }}
+                                        disabled={disabled}
+                                        isLoading={isLoading}
+                                    >
+                                        Ок
+                                    </Button>
+                                </Buttons>
+                            </Right>
+                        </FooterContent>
                     </Container>
                 </Footer>
             </Popup>
@@ -88,3 +94,12 @@ const Header = styled.div`
 const Content = styled.div``
 
 const Footer = styled.div``
+
+const Left = styled.div``
+
+const Right = styled.div``
+
+const FooterContent = styled.div`
+    display: flex;
+    justify-content: space-between;
+`

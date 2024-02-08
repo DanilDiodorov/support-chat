@@ -1,20 +1,29 @@
 import styled from 'styled-components'
 import { useSendMessage } from '../hooks/use-send-message'
-import { useState } from 'react'
 import { Button } from 'shared'
-import { SlPaperClip } from 'react-icons/sl'
 import { IoSend } from 'react-icons/io5'
+import TemplatesListSidebar from 'widget/template-list-sidebar'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    selectCurrentTemplateSidebar,
+    setOpenSidebar,
+} from 'features/template/model'
+import { BsChatLeftText } from 'react-icons/bs'
+import { IoCloseSharp } from 'react-icons/io5'
+import { selectCurrentText, setText } from 'entities/text'
 
 let shift = false
 
 export const MessageTools = ({ currentChat }) => {
-    const [text, setText] = useState()
+    const text = useSelector(selectCurrentText)
     const sendMessageHandler = useSendMessage()
+    const dispatch = useDispatch()
+    const openSidebar = useSelector(selectCurrentTemplateSidebar)
 
     const clickHandler = () => {
         if (text.trim().length > 0) {
             sendMessageHandler(currentChat, text)
-            setText('')
+            dispatch(setText(''))
         }
     }
 
@@ -40,13 +49,21 @@ export const MessageTools = ({ currentChat }) => {
                 value={text}
                 rows={3}
                 placeholder="Сообщение"
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => dispatch(setText(e.target.value))}
                 onKeyDown={keyDownHandler}
                 onKeyUp={keyUpHandler}
             />
             <Buttons>
                 <FileIcon>
-                    <SlPaperClip />
+                    {!openSidebar ? (
+                        <BsChatLeftText
+                            onClick={() => dispatch(setOpenSidebar(true))}
+                        />
+                    ) : (
+                        <IoCloseSharp
+                            onClick={() => dispatch(setOpenSidebar(false))}
+                        />
+                    )}
                 </FileIcon>
 
                 <Button
@@ -63,6 +80,7 @@ export const MessageTools = ({ currentChat }) => {
                     <IoSend />
                 </Button>
             </Buttons>
+            <TemplatesListSidebar />
         </Main>
     )
 }
