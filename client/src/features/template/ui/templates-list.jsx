@@ -2,16 +2,37 @@ import styled from 'styled-components'
 import { useGetTemplates } from '../hooks/use-get-templates'
 import { TemplateBlock } from './template-block'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { TextField } from 'shared'
 
 export const TemplatesList = () => {
     const { data } = useGetTemplates()
+    const [searchText, setSearchText] = useState('')
+    const [filtredData, setFiltredData] = useState([])
+
+    useEffect(() => {
+        if (data) {
+            setFiltredData(
+                data.filter(({ text }) =>
+                    text.toLowerCase().includes(searchText.toLowerCase())
+                )
+            )
+        }
+    }, [data, searchText])
 
     return (
         <Main>
-            {data?.map((item) => (
+            <TextField
+                inputProps={{
+                    placeholder: 'Поиск',
+                    onChange: (e) => setSearchText(e.target.value),
+                    value: searchText,
+                }}
+            />
+            {filtredData?.map((item) => (
                 <TemplateBlock key={item.id} template={item} />
             ))}
-            {data?.length === 0 && (
+            {filtredData?.length === 0 && (
                 <Message>
                     Пусто. <Link to="/templates">Добавить шаблон</Link>
                 </Message>
