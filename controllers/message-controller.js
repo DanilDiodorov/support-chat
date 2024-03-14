@@ -25,7 +25,7 @@ class MessageController {
                 type,
                 isOperator,
             } = req.body
-            const { destinationId } = req.user
+            const { destinationId, avatar } = req.user
 
             messageService.addTextMessageFromOperator(
                 id,
@@ -38,7 +38,8 @@ class MessageController {
                 createdAt,
                 type,
                 isOperator,
-                destinationId
+                destinationId,
+                avatar
             )
             res.status(200).send()
         } catch (error) {

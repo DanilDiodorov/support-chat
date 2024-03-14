@@ -24,5 +24,6 @@ router.post(
     upload.single('file'),
     userController.changeProfilePhoto
 )
+router.delete('/photo', authMiddleware, userController.deleteProfilePhoto)
 
 module.exports = router

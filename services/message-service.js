@@ -166,7 +166,8 @@ class MessageService {
         createdAt,
         type,
         isOperator,
-        destinationId
+        destinationId,
+        avatar
     ) {
         const url = webhookService.getWebhook(destinationId)
 
@@ -179,7 +180,9 @@ class MessageService {
                 employeeId: operatorId,
                 firstName: operatorFirstName,
                 lastName: operatorLastName,
-                avatarUrl: `${process.env.CLIENT_URL}/file/image`,
+                avatarUrl:
+                    avatar &&
+                    `${process.env.CLIENT_URL}/file/image?id=${operatorId}`,
             },
         })
 

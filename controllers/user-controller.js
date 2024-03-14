@@ -118,6 +118,16 @@ class UserController {
             console.log(error)
         }
     }
+
+    async deleteProfilePhoto(req, res, next) {
+        try {
+            const { id } = req.user
+            await userService.deleteProfilePhoto(id)
+            res.status(200).send()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 module.exports = new UserController()

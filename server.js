@@ -9,6 +9,7 @@ const socket = require('socket.io')
 const initSocket = require('./io')
 const path = require('path')
 const aimRouter = require('./routes/aim-router')
+const methodOverride = require('method-override')
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
@@ -18,6 +19,7 @@ const corsOptions = {
     optionSuccessStatus: 200,
 }
 
+app.use(methodOverride('_method'))
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use('/', aimRouter)

@@ -1,13 +1,25 @@
 import styled from 'styled-components'
 import { useGetTemplates } from '../hooks/use-get-templates'
 import { EditableTemplateBlock } from './editable-template-block'
-import { Button } from 'shared'
-import { useState } from 'react'
+import { Button, TextField } from 'shared'
+import { useEffect, useState } from 'react'
 import { TemplatePopup } from './template-popup'
 
 export const EditableTempatesList = () => {
     const { data } = useGetTemplates()
     const [active, setActive] = useState(false)
+    const [searchText, setSearchText] = useState('')
+    const [filtredData, setFiltredData] = useState([])
+
+    useEffect(() => {
+        if (data) {
+            setFiltredData(
+                data.filter(({ text }) =>
+                    text.toLowerCase().includes(searchText.toLowerCase())
+                )
+            )
+        }
+    }, [data, searchText])
 
     return (
         <Main>
@@ -15,17 +27,24 @@ export const EditableTempatesList = () => {
             <ButtonBlock>
                 <Button
                     buttonProps={{
-                        style: { width: '200px' },
+                        style: { width: '100px' },
                         onClick: () => setActive(true),
                     }}
                 >
                     Добавить
                 </Button>
             </ButtonBlock>
-            {data?.map((item) => (
+            <TextField
+                inputProps={{
+                    placeholder: 'Поиск',
+                    onChange: (e) => setSearchText(e.target.value),
+                    value: searchText,
+                }}
+            />
+            {filtredData?.map((item) => (
                 <EditableTemplateBlock key={item.id} template={item} />
             ))}
-            {data?.length === 0 && <Message>Пусто</Message>}
+            {filtredData?.length === 0 && <Message>Пусто</Message>}
         </Main>
     )
 }
@@ -40,7 +59,8 @@ const Main = styled.div`
 
 const ButtonBlock = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
 `
 
 const Message = styled.div`

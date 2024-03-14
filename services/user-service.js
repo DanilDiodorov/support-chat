@@ -135,6 +135,23 @@ class UserService {
             })
         })
     }
+
+    async deleteProfilePhoto(id) {
+        // const filePath = path.join(
+        //     __dirname,
+        //     '/../assets/images/users/' + id + '.png'
+        // )
+        await db.query('UPDATE users SET avatar=false WHERE id=$1', [id])
+
+        // console.log(filePath)
+
+        // try {
+        //     fs.unlink(filePath)
+        //     console.log(`File ${filePath} has been deleted.`)
+        // } catch (err) {
+        //     throw err
+        // }
+    }
 }
 
 module.exports = new UserService()
