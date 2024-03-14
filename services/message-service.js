@@ -182,7 +182,7 @@ class MessageService {
                 lastName: operatorLastName,
                 avatarUrl:
                     avatar &&
-                    `${process.env.CLIENT_URL}/file/image?id=${operatorId}`,
+                    `${process.env.CLIENT_URL}/server/file/image?id=${operatorId}`,
             },
         })
 
